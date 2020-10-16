@@ -96,11 +96,9 @@ public class MeritBank {
 	
 	static boolean readFromFile(String fileName)
 	{
-		//BufferedReader rd = null;
 		
 		try {
 			BufferedReader rd = new BufferedReader(new FileReader(fileName));
-			// reads the data and puts it where it belongs
 			accountData = rd.readLine() + "\n";
 			
 			for (int x = 0; x < 23; x++)

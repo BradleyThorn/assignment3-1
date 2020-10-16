@@ -1,13 +1,13 @@
 package com.meritamerica.assignment3;
 
-import java.util.Date;
+import java.util.*;
 import java.text.*;
 
 public class BankAccount {
 	
 	double balance;
 	double interestRate;
-	static long accountNumber;
+	long accountNumber;
 	static Date accountOpenedOn;
 	static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	
@@ -72,7 +72,7 @@ public class BankAccount {
 	}
 	
 	double futureValue(int years) {
-		double futureValue = balance* Math.pow((1+ interestRate), years);
+		double futureValue = balance* Math.pow(1+ this.interestRate, years);
 		return futureValue;
 	} 
 	

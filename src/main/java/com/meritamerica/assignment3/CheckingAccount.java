@@ -1,16 +1,11 @@
 package com.meritamerica.assignment3;
 
-import com.meritamerica.assignment3.BankAccount;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.*;
 
 public class CheckingAccount extends BankAccount{
 
-	public static double balance;
-	public static double interestRate = 0.0001;
+	static double interestRate = .0001;
 	
 	public CheckingAccount(double openingBalance, double interestRate){
 		super(openingBalance, interestRate);
@@ -32,7 +27,6 @@ public class CheckingAccount extends BankAccount{
 		
 		try {
 			ArrayList<String> x = new ArrayList<>(Arrays.asList(accountData.split(",")));
-			//List<String> x = Arrays.asList(accountData.split("\\s*,\\s*"));
 			long acNum = Long.parseLong(x.get(0));
 			double b = Double.parseDouble(x.get(1));
 			double ir = Double.parseDouble(x.get(2));

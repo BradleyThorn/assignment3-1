@@ -1,8 +1,9 @@
 package com.meritamerica.assignment3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AccountHolder {
+public class AccountHolder implements Comparable<AccountHolder>{
 	// Class variables
 		private String firstName;
 		private String middleName;
@@ -31,22 +32,25 @@ public class AccountHolder {
 	 * This method validates that aggregate account balances are less than $250,000.00 
 	   and add checking account to account holder by taking opening balance as parameter
 	 * @param openBalance Account holder's initial opening balance
+	 * @return 
 	 */
 
 
-		public void addCheckingAccount(double openBalance) {
+		public CheckingAccount addCheckingAccount(double openBalance) {
+	
 			if(getCheckingBalance() + getSavingsBalance() + openBalance >= 250000) {
 				System.out.println("Cannot open a new Checking Account because aggregate balance of accounts is to high.");
-				return;
+				return null;
 			}
 			
-			CheckingAccount newA = new CheckingAccount(openBalance);
+			CheckingAccount newA = new CheckingAccount(openBalance, .0001);
 			CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
 			for (int i = 0; i < newCheckingArray.length-1; i++) {
 				newCheckingArray[i] = checkingArray[i];
 			}
 			checkingArray = newCheckingArray;
 			checkingArray[checkingArray.length-1] = newA;
+			return newA;
 		}
 
 	/**
@@ -85,18 +89,19 @@ public class AccountHolder {
 	 * @param openBalance the initial opening balance of the saving account
 	 */
 		
-		public void addSavingsAccount(double openBalance) {
+		public SavingsAccount addSavingsAccount(double openBalance) {
 			if(getCheckingBalance() + getSavingsBalance() + openBalance >= 250000) {
 				System.out.println("Cannot open a new Savings Account because aggregate balance of accounts is to high.");
-				return;
+				return null;
 			}
-				SavingsAccount newA = new SavingsAccount(openBalance);
+				SavingsAccount newA = new SavingsAccount(openBalance, 0.01);
 				SavingsAccount[] newSavingsArray = new SavingsAccount[savingsArray.length+1];
 				for (int i = 0; i < newSavingsArray.length-1; i++) {
 					newSavingsArray[i] = savingsArray[i];
 				}
 				savingsArray = newSavingsArray;
 				savingsArray[savingsArray.length-1] = newA;
+				return newA;
 		}
 		
 	/**
@@ -150,9 +155,10 @@ public class AccountHolder {
 		 * This method used to add CDAccount to the account holder
 		 * @param offering the CDOffering 
 		 * @param openBalance the opening balance
+		 * @return 
 		 */
 			
-		public void addCDAccount(CDOffering offering, double openBalance) {
+		public CDAccount addCDAccount(CDOffering offering, double openBalance) {
 				CDAccount newA = new CDAccount(offering, openBalance);
 				CDAccount[] newCDArray = new CDAccount[cdAccountArray.length+1];
 				for (int i = 0; i < newCDArray.length-1; i++) {
@@ -160,6 +166,7 @@ public class AccountHolder {
 				}
 				cdAccountArray = newCDArray;
 				cdAccountArray[cdAccountArray.length-1] = newA;
+				return newA;
 		}
 		
 		public void addCDAccount(CDAccount cdAccount) {
@@ -230,4 +237,38 @@ public class AccountHolder {
 		public int getNumberOfCheckingAccounts() {
 			return checkingArray.length;
 		}
+		
+		static AccountHolder readFromString(String accountHolderData) throws Exception
+		{
+			AccountHolder ah;
+			try {
+				ArrayList<String> x = new ArrayList<>(Arrays.asList(accountHolderData.split(",")));
+				ah = new AccountHolder(x.get(0), x.get(1), x.get(2), x.get(3));
+			}
+			catch(Exception ex)
+			{
+				throw new java.lang.Exception();
+			}
+			return ah;
+		}
+		
+		public int compareTo(AccountHolder otherAccountHolder)
+		{
+			double x = this.getCombinedBalance();
+			double y = otherAccountHolder.getCombinedBalance();
+			if (x==y)
+			{
+				return 0;
+			}
+			else if(this.getCombinedBalance()>otherAccountHolder.getCombinedBalance())
+			{
+				return 1;
+			}
+			else
+			{
+				return -1;
+			}
+			
+		}
+		
 }
