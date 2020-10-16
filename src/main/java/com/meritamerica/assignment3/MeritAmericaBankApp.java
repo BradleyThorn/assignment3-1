@@ -9,7 +9,8 @@ public class MeritAmericaBankApp {
 	public static void main(String[] args) {
 		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 		String x = MeritBank.accountData;
-		//List<String> x = Arrays.asList(x.split(","));
+		String[] arr = new String[3];
+		
 		
 		
 		

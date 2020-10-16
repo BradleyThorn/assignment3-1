@@ -20,5 +20,7 @@ public class SavingsAccount extends BankAccount {
 	public SavingsAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn) {
 		super(accountNumber, balance, interestRate, accountOpenedOn);
 	}
+	
+	
 
 }

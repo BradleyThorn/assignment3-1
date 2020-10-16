@@ -1,13 +1,15 @@
 package com.meritamerica.assignment3;
 
 import java.util.Date;
+import java.text.*;
 
 public class BankAccount {
 	
 	double balance;
 	double interestRate;
-	long accountNumber;
-	Date accountOpenedOn;
+	static long accountNumber;
+	static Date accountOpenedOn;
+	static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public BankAccount(double balance, double interestRate){
 		this.balance = balance;

@@ -9,8 +9,8 @@ import java.util.*;
 
 public class CheckingAccount extends BankAccount{
 
-	public double balance;
-	public double interestRate = 0.0001;
+	public static double balance;
+	public static double interestRate = 0.0001;
 	
 	public CheckingAccount(double openingBalance, double interestRate){
 		super(openingBalance, interestRate);
@@ -26,23 +26,24 @@ public class CheckingAccount extends BankAccount{
 	}
 	
 	
-	CheckingAccount readFromString(String accountData) throws ParseException
+	static CheckingAccount readFromString(String accountData) throws ParseException
 	{
+		CheckingAccount chk;
+		
 		try {
 			ArrayList<String> x = new ArrayList<>(Arrays.asList(accountData.split(",")));
 			//List<String> x = Arrays.asList(accountData.split("\\s*,\\s*"));
 			long acNum = Long.parseLong(x.get(0));
-			accountNumber = acNum;
 			double b = Double.parseDouble(x.get(1));
-			balance = b;
 			double ir = Double.parseDouble(x.get(2));
-			interestRate = ir;
+			Date date = formatter.parse(x.get(3));
+			chk = new CheckingAccount(acNum, b, ir, date);
 		}
 		catch(ParseException ex) {
-			
+			throw new java.lang.NumberFormatException();
 		}
-		
-		//accountOpenedOn = date;	
+		return chk;
+			
 		
 	}
 	
